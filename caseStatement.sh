@@ -24,4 +24,4 @@ case $month in
     12)		echo Decemember ;;
     *)		echo "No month matches $month" && exit 2 ;; 
 esac
-
+exit 0
