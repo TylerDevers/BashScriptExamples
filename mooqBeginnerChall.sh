@@ -3,7 +3,7 @@
 # Declare functions
 
 randomData() {
-     echo $(cat /dev/urandom | tr -dc '0-9a-zA-Z' | head -c 14)
+     echo $(cat /dev/urandom | tr -dc '0-9a-zA-Z' | head -c 15)
 }
 
 # Make output file and define file size for tracking purposes
@@ -15,14 +15,15 @@ else
 fi
 
 # Add random latin characters to output file, lines are 15 character maximum 
-i=0
-while [ $i -le 15 ]
+file=mooq.out
+fileSize=$( wc -c <$file )
+while [ $fileSize -le 1000000 ]
 do 
      randomData >> mooq.out
-     fileSize=$( ls -s mooq.out ) 
+     fileSize=$( wc -c <$file ) 
      i=$(( $i+1 ))
 done
-cat mooq.out
-echo -e "mooq exists with a size of: $fileSize \n\n"
+echo "file size has exceeded 1M: aborting.... "
+echo "mooq size is:  $(wc -c < $file )"
 exit 0
 
