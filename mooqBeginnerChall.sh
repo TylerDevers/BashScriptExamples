@@ -9,13 +9,6 @@ randomData() {
      echo $(cat /dev/urandom | tr -dc '0-9a-zA-Z' | head -c 15)
 }
 
-sortData() {
-     unsortedFile= $1
-     $( sort -d unsortedFile -o sortedMooq.out )
-#     $( head sortedMooq.out )
-#     $( tail sortedMooq.out ) 
-}
-
 ## Make output file and define file size for tracking purposes
 # Test if output file exists, if it does, empty the file. If it does not, create the file
 if [ -f mooq.out ] ; then 
@@ -45,7 +38,8 @@ echo "file size has exceeded 1M: Beginning sort... "
 echo "mooq size is:  $(wc -c < $outputFile)"
 
 # sort the output file in dictionary order, since it is a common sort order
-sortData $outputFile
+$( sort -d mooq.out -o sortedMooq.out )
+cat sortedMooq.out && wc -l sortedMooq.out 
 
 exit 0
 
